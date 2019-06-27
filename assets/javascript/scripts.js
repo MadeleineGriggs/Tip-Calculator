@@ -5,6 +5,11 @@ var tipPercentage = 0;
 // These two values are optional, since the user may not want to round the tip or split between anyone.
 var splitBetween = 0;
 var rounding = 0;
+// Variables that are used to store results of the calculated tip.
+var billWithTip = 0;
+var tipTotal = 0;
+var tipPerPerson = 0;
+var billWithTipPerPerson = 0;
 
 $("#submit-btn").on("click", function() {
     // prevent button from trying to submit the form to a server.
@@ -38,30 +43,49 @@ function checkFields() {
          if($('input:radio[name=tip-percentage]:checked').val() == "custom" && $("#custom-tip-field").val() === "") {
              alert("You have selected 'Custom Tip', but you have not entered the custom tip amount in the custom tip field.");
          } else if($('input:radio[name=tip-percentage]:checked').val() == "custom") {
-             tipPercentage = $("#custom-tip-field").val()
+             tipPercentage = parseInt($("#custom-tip-field").val(), 10);
          } else {
-             tipPercentage = $('input:radio[name=tip-percentage]:checked').val()
+             tipPercentage = parseInt($('input:radio[name=tip-percentage]:checked').val(), 10);
         }
         // Check if the user has entered a value in the split between field. If they have, then set
         // the "splitBetween" variable to what they've entered.
         if($("#split-between").val() === "") {
 
         } else {
-            splitBetween = $("#split-between").val();
+            splitBetween = parseInt($("#split-between").val(), 10);
         }
 
-    billTotal = $("#bill-total").val().trim();
+    billTotal = parseInt($("#bill-total").val().trim(), 10);
     console.log("Bill Total is: " + billTotal, "Tip Percentage is: " + tipPercentage, "Rounding value is: " + rounding, "Split is: " + splitBetween);
     calculateTip();
     }   
 }
 
+// Calculates the tip, bill total with tip, split of the tip per person etc. based on what the user has inputed.
 function calculateTip() {
-
+    if (rounding === 0 && splitBetween === 0) {
+    tipTotal = (tipPercentage / 100) * billTotal;
+    billWithTip = tipTotal + billTotal;
+    console.log("You Are not rounding or splitting between anyone: " + tipTotal);
+    displayTotals();
+    } else if (rounding === 0 && splitBetween != 0) {
+        tipTotal = (tipPercentage / 100) * billTotal;
+        billWithTip = tipTotal + billTotal;
+        var tipPerPersonNoRound = tipTotal / splitBetween;
+        tipPerPerson = tipPerPersonNoRound.toFixed(2);
+        billWithTipPerPerson = billWithTip / splitBetween;
+        $("#split-display1").toggleClass("hidden");
+        $("#split-display2").toggleClass("hidden");
+        displayTotals();
+    }
 }
 
 function displayTotals() {
-    $("#bill-no-tip").text(billTotal);
+    $("#tip-percent-selected").text(tipPercentage + "%");
+    $("#bill-no-tip").text("$ " + billTotal);
+    $("#tip-total").text("$ " + tipTotal);
+    $("#bill-with-tip-total").text("$ " + billWithTip);
+    $("#tip-person-total").text("$" + tipPerPerson + "per person");
 }
 
 // Function allows only numbers, backspace, delete, and one decimal to be added to the 
