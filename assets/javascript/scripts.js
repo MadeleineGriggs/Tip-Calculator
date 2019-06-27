@@ -42,7 +42,7 @@ function checkFields() {
         // a pre-set tip percentage, set tip percentage to that.
          if($('input:radio[name=tip-percentage]:checked').val() == "custom" && $("#custom-tip-field").val() === "") {
              alert("You have selected 'Custom Tip', but you have not entered the custom tip amount in the custom tip field.");
-         } else if($('input:radio[name=tip-percentage]:checked').val() == "custom") {
+         } else if($('input:radio[name=tip-percentage]:checked', "#my-form").val() == "custom") {
              tipPercentage = parseInt($("#custom-tip-field").val(), 10);
          } else {
              tipPercentage = parseInt($('input:radio[name=tip-percentage]:checked').val(), 10);
@@ -55,7 +55,7 @@ function checkFields() {
             splitBetween = parseInt($("#split-between").val(), 10);
         }
 
-    billTotal = parseInt($("#bill-total").val().trim(), 10);
+    billTotal = parseFloat($("#bill-total").val(), 10);
     console.log("Bill Total is: " + billTotal, "Tip Percentage is: " + tipPercentage, "Rounding value is: " + rounding, "Split is: " + splitBetween);
     calculateTip();
     }   
@@ -66,7 +66,7 @@ function calculateTip() {
     if (rounding === 0 && splitBetween === 0) {
         console.log("You Are not rounding or splitting between anyone.");
     tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
-    billWithTip = tipTotal + billTotal;
+    billWithTip = parseInt(tipTotal) + billTotal;
     displayTotals();
     } else if (rounding === 0 && splitBetween != 0) {
         console.log("You are splitting, but not rounding the bill.")
