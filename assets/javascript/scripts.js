@@ -14,26 +14,54 @@ $("#submit-btn").on("click", function() {
 
 
 function checkFields() {
-    if ($("#bill-total").val() === "") {
+    // If the bill total area is black, or zero, send an alert to the user to let them know.
+    // The bill total field is restricted so no negative numbers or alphabet characters can be entered, only numbers
+    // and a single decimal, so we don't check for  negative numbers.
+    if ($("#bill-total").val() === "" || $("#bill-total").val() === "0" ) {
         alert("You haven't entered a bill total.");
     }
      else if ($('input:radio[name=tip-percentage]:checked').val() == undefined){
         alert("You must select a percentage you would like to tip.");
     }
      else {
+
+        // If they user doesn't want to round the tip, don't do anything. If they have selected to
+        // round the tip, set variable rounding to that value.
          if($('input:radio[name=rounding]:checked').val() == undefined) {
 
          } else {
              rounding = $('input:radio[name=rounding]:checked').val();
          }
+        // Check which tip radio button has been clicked. If it is the custom one, make sure the custom tip field
+        // contains a number. If not, send an alert to the user. If so, set the tip percentage. If the user selects
+        // a pre-set tip percentage, set tip percentage to that.
+         if($('input:radio[name=tip-percentage]:checked').val() == "custom" && $("#custom-tip-field").val() === "") {
+             alert("You have selected 'Custom Tip', but you have not entered the custom tip amount in the custom tip field.");
+         } else if($('input:radio[name=tip-percentage]:checked').val() == "custom") {
+             tipPercentage = $("#custom-tip-field").val()
+         } else {
+             tipPercentage = $('input:radio[name=tip-percentage]:checked').val()
+        }
+        // Check if the user has entered a value in the split between field. If they have, then set
+        // the "splitBetween" variable to what they've entered.
+        if($("#split-between").val() === "") {
+
+        } else {
+            splitBetween = $("#split-between").val();
+        }
+
     billTotal = $("#bill-total").val().trim();
-    tipPercentage = $('input:radio[name=tip-percentage]:checked').val()
-    console.log(billTotal, tipPercentage, rounding);
+    console.log("Bill Total is: " + billTotal, "Tip Percentage is: " + tipPercentage, "Rounding value is: " + rounding, "Split is: " + splitBetween);
+    calculateTip();
     }   
 }
 
 function calculateTip() {
 
+}
+
+function displayTotals() {
+    $("#bill-no-tip").text(billTotal);
 }
 
 // Function allows only numbers, backspace, delete, and one decimal to be added to the 
