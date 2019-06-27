@@ -32,10 +32,10 @@ function checkFields() {
 
         // If they user doesn't want to round the tip, don't do anything. If they have selected to
         // round the tip, set variable rounding to that value.
-         if($('input:radio[name=rounding]:checked').val() == undefined) {
+         if($('input:radio[name=rounding]:checked', "#my-form").val() == undefined) {
 
          } else {
-             rounding = $('input:radio[name=rounding]:checked').val();
+             rounding = $('input:radio[name=rounding]:checked', "#my-form").val();
          }
         // Check which tip radio button has been clicked. If it is the custom one, make sure the custom tip field
         // contains a number. If not, send an alert to the user. If so, set the tip percentage. If the user selects
@@ -64,28 +64,35 @@ function checkFields() {
 // Calculates the tip, bill total with tip, split of the tip per person etc. based on what the user has inputed.
 function calculateTip() {
     if (rounding === 0 && splitBetween === 0) {
-    tipTotal = (tipPercentage / 100) * billTotal;
+        console.log("You Are not rounding or splitting between anyone.");
+    tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
     billWithTip = tipTotal + billTotal;
-    console.log("You Are not rounding or splitting between anyone: " + tipTotal);
     displayTotals();
     } else if (rounding === 0 && splitBetween != 0) {
-        tipTotal = (tipPercentage / 100) * billTotal;
-        billWithTip = tipTotal + billTotal;
-        var tipPerPersonNoRound = tipTotal / splitBetween;
-        tipPerPerson = tipPerPersonNoRound.toFixed(2);
-        billWithTipPerPerson = billWithTip / splitBetween;
+        console.log("You are splitting, but not rounding the bill.")
+        tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
+        billWithTip = parseInt(tipTotal, 10) + billTotal;
+        tipPerPerson = (tipTotal / splitBetween).toFixed(2);
+        billWithTipPerPerson = (billWithTip / splitBetween).toFixed(2);
         $("#split-display1").toggleClass("hidden");
         $("#split-display2").toggleClass("hidden");
+        displayTotals();
+    } else if (rounding != 0 && splitBetween === 0) {
+        console.log("You are rounding, but not splitting the bill.")
+        tipTotalPreRounding = (tipPercentage / 100) * billTotal;
+        billWithTip = tipTotal + billTotal;
         displayTotals();
     }
 }
 
+//After the totals have been calculated, this function runs to display the totals on the page.
 function displayTotals() {
     $("#tip-percent-selected").text(tipPercentage + "%");
     $("#bill-no-tip").text("$ " + billTotal);
     $("#tip-total").text("$ " + tipTotal);
     $("#bill-with-tip-total").text("$ " + billWithTip);
-    $("#tip-person-total").text("$" + tipPerPerson + "per person");
+    $("#tip-person-total").text("$ " + tipPerPerson + " per person");
+    $("#bill-with-tip-per-person").text("$ " + billWithTipPerPerson + " per person");
 }
 
 // Function allows only numbers, backspace, delete, and one decimal to be added to the 
