@@ -27,6 +27,7 @@
     font-family: var(--title-font);
     color: var(--dark-gray);
     font-size: 3rem;
+    margin-bottom: 2rem;
 }
 
 .res-img {
@@ -45,4 +46,32 @@
 .radio-btn-container {
     display: flex;
     flex-direction: column;
+}
+
+.calc-intro {
+    font-family: var(--body-font);
+    color: var(--dark-gray);
+    font-size: 1.25rem;
+    margin: 0 auto;
+    width: 90vw;
+}
+
+.tip-form {
+    background-color: var(--light-purple);
+    padding: 1rem;
+    border-radius: 20px;
+    margin-right: 2rem;
+}
+
+#my-form {
+    font-family: var(--body-font);
+    color: var(--dark-gray);
+    font-size: 1.25rem;
+}
+#my-form h3{
+    font-family: var(--body-font);
+    color: var(--main-purple);
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
 }
