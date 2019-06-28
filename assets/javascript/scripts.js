@@ -66,12 +66,12 @@ function calculateTip() {
     if (rounding === 0 && splitBetween === 0) {
         console.log("You Are not rounding or splitting between anyone.");
     tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
-    billWithTip = parseInt(tipTotal) + billTotal;
+    billWithTip = parseFloat(tipTotal, 10) + billTotal;
     displayTotals();
     } else if (rounding === 0 && splitBetween != 0) {
         console.log("You are splitting, but not rounding the bill.")
         tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
-        billWithTip = parseInt(tipTotal, 10) + billTotal;
+        billWithTip = parseFloat(tipTotal, 10) + billTotal;
         tipPerPerson = (tipTotal / splitBetween).toFixed(2);
         billWithTipPerPerson = (billWithTip / splitBetween).toFixed(2);
         $("#split-display1").toggleClass("hidden");
@@ -79,8 +79,18 @@ function calculateTip() {
         displayTotals();
     } else if (rounding != 0 && splitBetween === 0) {
         console.log("You are rounding, but not splitting the bill.")
-        tipTotalPreRounding = (tipPercentage / 100) * billTotal;
-        billWithTip = tipTotal + billTotal;
+        if (rounding === "1") {
+            console.log("You are rounding to nearest dollar.");
+            tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
+            billWithTip = Math.round(parseFloat(tipTotalPreRound, 10) + billTotal);
+            tipTotal = parseInt(billWithTip) - billTotal;
+        } else {
+            console.log("You are rounding to a smaller than dollar value.");
+        tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
+        billWithTipPreRound = parseFloat(tipTotalPreRound, 10) + billTotal;
+        billWithTip = (Math.ceil(billWithTipPreRound * rounding) / rounding).toFixed(2);
+        tipTotal = parseInt(billWithTip) - billTotal;
+        }
         displayTotals();
     }
 }
