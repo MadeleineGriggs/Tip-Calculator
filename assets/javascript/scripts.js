@@ -2,7 +2,7 @@
 //Gobal variables for calculating bill. 
 var billTotal = 0;
 var tipPercentage = 0;
-// These two values are optional, since the user may not want to round the tip or split between anyone.
+// These two values the user can optionally fill in, since the user may not want to round the tip or split between anyone.
 var splitBetween = 0;
 var rounding = 0;
 // Variables that are used to store results of the calculated tip.
@@ -64,11 +64,13 @@ function checkFields() {
 // Calculates the tip, bill total with tip, split of the tip per person etc. based on what the user has inputed.
 function calculateTip() {
     if (rounding === 0 && splitBetween === 0) {
+        // Not rounding or splitting the bill.
         console.log("You Are not rounding or splitting between anyone.");
     tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
     billWithTip = parseFloat(tipTotal, 10) + billTotal;
     displayTotals();
     } else if (rounding === 0 && splitBetween != 0) {
+        // Splitting the bill, but not rounding it.
         console.log("You are splitting, but not rounding the bill.")
         tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
         billWithTip = parseFloat(tipTotal, 10) + billTotal;
@@ -78,6 +80,7 @@ function calculateTip() {
         $("#split-display2").toggleClass("hidden");
         displayTotals();
     } else if (rounding != 0 && splitBetween === 0) {
+        // Rounding the bill, but not splitting it.
         console.log("You are rounding, but not splitting the bill.")
         if (rounding === "1") {
             console.log("You are rounding to nearest dollar.");
@@ -91,6 +94,18 @@ function calculateTip() {
         billWithTip = (Math.ceil(billWithTipPreRound * rounding) / rounding).toFixed(2);
         tipTotal = parseInt(billWithTip) - billTotal;
         }
+        displayTotals();
+    } else if (rounding !=0 && splitBetween != 0) {
+        //Rounding and splitting the bill.
+        console.log("You want to round and split the bill.")
+        tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
+        billWithTipPreRound = parseFloat(tipTotalPreRound, 10) + billTotal;
+        billWithTip = (Math.ceil(billWithTipPreRound * rounding) / rounding).toFixed(2);
+        tipTotal = parseInt(billWithTip) - billTotal;
+        tipPerPerson = (tipTotal / splitBetween).toFixed(2);
+        billWithTipPerPerson = (billWithTip / splitBetween).toFixed(2);
+        $("#split-display1").toggleClass("hidden");
+        $("#split-display2").toggleClass("hidden");
         displayTotals();
     }
 }
