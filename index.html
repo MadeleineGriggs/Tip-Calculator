@@ -4,66 +4,74 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <!-- <link rel='stylesheet' href='//fonts.googleapis.com/css?family=font1|font2|etc' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab|Pacifico&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='assets/css/reset.css' type='text/css'>
     <link rel='stylesheet' href='assets/css/styles.css' type='text/css'>
     <title>Tip Calculator</title>
 </head>
 <body>
-<h1>Tip Calculator</h1>
+<h1 class="title">Tip Calculator</h1>
 
-<div class="tip-form">
-    <h2>Calculate Tips</h2>
-    <form id="my-form">
-        <div>
-            <label for="bill-total">Bill Total: </label>
-            <input type="text" id="bill-total" name="bill-total-input" class="numbers-decimals-only">
-        </div>
-        <div>
-            <label for="tip-percent-5">5% Tip</label>
-            <input type="radio" id="tip-percent-5" name="tip-percentage" value="5">
-            <label for="tip-percent-10">10% Tip</label>
-            <input type="radio" id="tip-percent-10" name="tip-percentage" value="10">
-            <label for="tip-percent-15">15% Tip</label>
-            <input type="radio" id="tip-percent-15" name="tip-percentage" value="15">
-            <label for="tip-percent-custom">Custom Tip</label>
-            <input type="radio" id="tip-percent-custom" name="tip-percentage" value="custom">
-        </div>
-        <div>
-                <label for="custom-tip-field">Custom Tip Percentage: </label>
-                <input type="text" id="custom-tip-field" name="Custom tip field" class="numbers-only">
-        </div>
-        <div>
-                <label for="split-between">Split Between: </label>
-                <input type="text" id="split-between" name="Split between field" class="numbers-only">
-        </div>
-        <div>
-                <label for="round-5">Round to nearest 5 cents</label>
-                <input type="radio" id="round-5" name="rounding" value="20">
-                <label for="round-10">Round to nearest 10 cents</label>
-                <input type="radio" id="round-10" name="rounding" value="10">
-                <label for="round-25">Round to nearest 25 cents</label>
-                <input type="radio" id="round-25" name="rounding" value="4">
-                <label for="round-100">Round to nearest dollar</label>
-                <input type="radio" id="round-100" name="rounding" value="1">
-        </div>
-        <div>
-                <button type="submit" id="submit-btn">Calculate Tip</button>
-        </div>
-    </form>
+<div class="flex-container">
+    <div class="tip-form">
+        <h2 class="sub-title">Calculate Tips</h2>
+        <form id="my-form">
+            <div>
+                <label for="bill-total">Bill Total: </label>
+                <input type="text" id="bill-total" name="bill-total-input" class="numbers-decimals-only">
+            </div>
+            <h3>Tip Percentage</h3>
+            <div class="radio-btn-container">
+                <label for="tip-percent-5">5% Tip</label>
+                <input type="radio" id="tip-percent-5" name="tip-percentage" value="5">
+                <label for="tip-percent-10">10% Tip</label>
+                <input type="radio" id="tip-percent-10" name="tip-percentage" value="10">
+                <label for="tip-percent-15">15% Tip</label>
+                <input type="radio" id="tip-percent-15" name="tip-percentage" value="15">
+                <label for="tip-percent-custom">Custom Tip</label>
+                <input type="radio" id="tip-percent-custom" name="tip-percentage" value="custom">
+            </div>
+            <div>
+                    <label for="custom-tip-field">Custom Tip Percentage: </label>
+                    <input type="text" id="custom-tip-field" name="Custom tip field" class="numbers-only">
+            </div>
+            <h3>Split Bill by Number of People</h3>
+            <div>
+                    <label for="split-between">Split Between: </label>
+                    <input type="text" id="split-between" name="Split between field" class="numbers-only">
+            </div>
+            <h3>Round Bill to Nearest Coin</h3>
+            <div class="radio-btn-container">
+                    <label for="round-5">Round to nearest 5 cents</label>
+                    <input type="radio" id="round-5" name="rounding" value="20">
+                    <label for="round-10">Round to nearest 10 cents</label>
+                    <input type="radio" id="round-10" name="rounding" value="10">
+                    <label for="round-25">Round to nearest 25 cents</label>
+                    <input type="radio" id="round-25" name="rounding" value="4">
+                    <label for="round-100">Round to nearest dollar</label>
+                    <input type="radio" id="round-100" name="rounding" value="1">
+            </div>
+            <div>
+                    <button type="submit" id="submit-btn">Calculate Tip</button>
+            </div>
+        </form>
+        <img src="assets/images/having-fun.svg" class="res-img">  
+    </div>
+
+    <div class="results">
+
+        <h2 class="sub-title">Your Results</h2>
+        <p>Bill Without Tip: <span id="bill-no-tip"></span></p>
+        <p>Tip Percentage Selected: <span id="tip-percent-selected"></span></p>
+        <p>Tip total: <span id="tip-total"></span></p>
+        <p>Bill Total with Tip: <span id="bill-with-tip-total"></span></p>
+        <p class="hidden" id="split-display1">Tip Per Person: <span id="tip-person-total"></span></p>
+        <p class="hidden" id="split-display2">Bill Total with Tip Per Person: <span id="bill-with-tip-per-person"></span></p>
+        <img src="assets/images/calculator.svg" class="res-img">    
+    </div>
 </div>
 
-<div class="results">
-    <h2>Your Results</h2>
-    <p>Bill Without Tip: <span id="bill-no-tip"></span></p>
-    <p>Tip Percentage Selected: <span id="tip-percent-selected"></span></p>
-    <p>Tip total: <span id="tip-total"></span></p>
-    <p>Bill Total with Tip: <span id="bill-with-tip-total"></span></p>
-    <p class="hidden" id="split-display1">Tip Per Person: <span id="tip-person-total"></span></p>
-    <p class="hidden" id="split-display2">Bill Total with Tip Per Person: <span id="bill-with-tip-per-person"></span></p>
-</div>
-
-
+<!-- javascript and jQuery links -->
     <script src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous'></script>
     <script src='assets/javascript/scripts.js'></script>
 </body>

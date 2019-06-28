@@ -1,3 +1,48 @@
+:root {
+    --main-purple: #7d4fcc;
+    --light-purple: #f5f0ff;
+    --dark-gray: #444053;
+    --mid-gray: #5d5a72;
+    --light-gray: #e6e8ec;
+
+    --title-font:  'Pacifico', cursive;
+    --body-font: 'Josefin Slab', serif;
+}
+
+
 .hidden {
     display: none;
+}
+
+.title {
+    font-family: var(--title-font);
+    color: var(--main-purple);
+    font-size: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.sub-title {
+    font-family: var(--title-font);
+    color: var(--dark-gray);
+    font-size: 3rem;
+}
+
+.res-img {
+    width: 100%;
+    height: auto;
+    max-width: 35vw;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.radio-btn-container {
+    display: flex;
+    flex-direction: column;
 }
