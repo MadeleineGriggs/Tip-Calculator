@@ -13,25 +13,25 @@ this is an app for calculating the tip percentage of a total bill. It is also ab
 This project was created as part of the UofT Coding Bootcamp Career Services Coding Challenge. The task was to create a simple calculator for tips as either a command-line or front-end application. No boilerplate code was provided. The guidelines were as follows:
 
 ### The Application Must:
-..* Take in the value of the bill.
-..* Take in the desired tip percentage.
-..* Include the option to split the tip amount by the number of people at the table.
-..* The application should then calculate the amount of tip per table (or per person) and return that value to the user.
-..* The bill value must be a positive float, but the application must handle user input that might be a negative or 0 dollar amount.
-..* The user input percentage for the tip must be a positive float.
-..* The return value must be a float rounded to two decimal points.
+  * Take in the value of the bill.
+  * Take in the desired tip percentage.
+  * Include the option to split the tip amount by the number of people at the table.
+  * The application should then calculate the amount of tip per table (or per person) and return that value to the user.
+  * The bill value must be a positive float, but the application must handle user input that might be a negative or 0 dollar amount.
+  * The user input percentage for the tip must be a positive float.
+  * The return value must be a float rounded to two decimal points.
 
 ## Bonus Features
-..* Create a simple UI so that this can be used in a browser.
-..* Deploy to your favourite hosting service.
+  * Create a simple UI so that this can be used in a browser.
+  * Deploy to your favourite hosting service.
 
 
 In addition to the features required by the challenge, I tried to implement the following:
 
-..* Added rounding, so the user could select to round the bill total with tip to the nearest coin.
-..* Made a stylish and responsive UI.
-..* Adding extensive code comments to the javascript, so other people may easily understand how the calculating functions work.
-..* Added CSS variables for colors and fonts, so they could be easily changed if required.
+  * Added rounding, so the user could select to round the bill total with tip to the nearest coin.
+  * Made a stylish and responsive UI.
+  * Adding extensive code comments to the javascript, so other people may easily understand how the calculating functions work.
+  * Added CSS variables for colors and fonts, so they could be easily changed if required.
 
 
 This project was written using: HTML5, CSS3, jQuery 3.4.1, and Javascript.
