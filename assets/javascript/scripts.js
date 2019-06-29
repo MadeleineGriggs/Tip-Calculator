@@ -72,10 +72,11 @@ $(document).ready(function(){
         displayTotals();
         } else if (rounding === 0 && splitBetween != 0) {
             // Splitting the bill, but not rounding it.
-            tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
-            billWithTip = parseFloat(tipTotal, 10) + billTotal;
-            tipPerPerson = (tipTotal / splitBetween).toFixed(2);
-            billWithTipPerPerson = (billWithTip / splitBetween).toFixed(2);
+            tipTotalPreSplit = ((tipPercentage / 100) * billTotal).toFixed(2);
+            billWithTip = parseFloat(tipTotalPreSplit, 10) + billTotal;
+            tipPerPerson = (parseFloat(tipTotalPreSplit, 10) / splitBetween).toFixed(2);
+            billWithTipPerPerson = (parseFloat(billWithTip, 10) / splitBetween).toFixed(2);
+            tipTotal = parseFloat(tipTotalPreSplit, 10).toFixed(2);
             $("#split-display1").toggleClass("hidden");
             $("#split-display2").toggleClass("hidden");
             $("#split-title").toggleClass("hidden");
@@ -85,7 +86,7 @@ $(document).ready(function(){
             if (rounding === "1") {
                 tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
                 billWithTip = Math.round(parseFloat(tipTotalPreRound, 10) + billTotal);
-                tipTotal = parseInt(billWithTip) - billTotal;
+                tipTotal = parseFloat(billWithTip, 10) - billTotal;
             } else {
             tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
             billWithTipPreRound = parseFloat(tipTotalPreRound, 10) + billTotal;

@@ -34,11 +34,13 @@
     width: 100%;
     height: auto;
     max-width: 35vw;
+    margin-top: 5rem;
 }
 
 .flex-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     width: 90vw;
     margin: 0 auto;
     margin-bottom: 5rem;
@@ -64,6 +66,8 @@
     padding: 2rem;
     border-radius: 20px;
     margin-right: 4rem;
+    display: flex;
+    flex-direction: column;
 }
 
 #my-form {
@@ -72,6 +76,7 @@
     font-size: 1.25rem;
     line-height: 1.75rem;
 }
+
 #my-form h3{
     font-family: var(--body-font);
     color: var(--main-purple);
@@ -93,6 +98,8 @@
 }
 
 .results {
+    display: flex;
+    flex-direction: column;
     background-color: var(--light-gray);
     padding: 2rem;
     border-radius: 20px;
@@ -100,6 +107,12 @@
     color: var(--dark-gray);
     font-size: 1.25rem;
     line-height: 1.75rem;
+    align-items: flex-start;
+}
+
+.results h2{    
+    margin-top: 0.75rem;
+    margin-bottom: 2.5rem;
 }
 
 .results h3 {
@@ -107,7 +120,11 @@
     color: var(--main-purple);
     font-size: 1.75rem;
     margin-bottom: 0.75rem;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
+}
+
+.results img {
+    margin-top: 25rem;
 }
 
 input[type=text] {
@@ -123,4 +140,56 @@ input[type=text]:focus {
     outline: none;
     border: 1px solid var(--main-purple);
     background-color: var(--light-gray);
+}
+
+/* ---------Media Queries--------- */
+
+@media only screen and (max-width: 1100px) {
+    .res-img {
+        margin-top: 2rem;
+    }
+    .results img {
+        margin-top: 22rem;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .tip-form {
+        margin-right: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .results {
+        margin-right: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .res-img {
+        max-width: 100%;
+        margin-top: 1rem;
+    }
+
+    .results img {
+        margin-top: 2rem;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .tip-form {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .results {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
 }
