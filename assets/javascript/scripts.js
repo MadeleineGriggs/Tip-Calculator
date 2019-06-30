@@ -26,11 +26,23 @@ $(document).ready(function(){
     }
 
 
+    // When the user clicks to calculate tips, this function runs.
     $("#submit-btn").on("click", function() {
         // prevent button from trying to submit the form to a server.
         event.preventDefault();
         checkFields();
-        $(".results").scrollView();
+    })
+
+
+    // This function makes the modal window for alerts hide and show.
+    function toggleModal() {
+        $(".modal").toggleClass("show-modal")
+    }
+
+    // The close button on the modal window toggles the window.
+    $(".close-button").on("click", function() {
+        toggleModal();
+        $("#modal-message").empty();
     })
 
 
@@ -39,10 +51,12 @@ $(document).ready(function(){
         // The bill total field is restricted so no negative numbers or alphabet characters can be entered, only numbers
         // and a single decimal, so we don't check for  negative numbers.
         if ($("#bill-total").val() === "" || $("#bill-total").val() === "0" ) {
-            alert("You haven't entered a bill total.");
+            $("#modal-message").text("You haven't entered a bill total.")
+            toggleModal();
         }
         else if ($('input:radio[name=tip-percentage]:checked').val() == undefined){
-            alert("You must select a percentage you would like to tip.");
+            $("#modal-message").text("You must select a percentage you would like to tip.")
+            toggleModal();
         }
         else {
 
@@ -74,6 +88,7 @@ $(document).ready(function(){
 
         billTotal = parseFloat($("#bill-total").val(), 10);
         calculateTip();
+        $(".results").scrollView();
         }   
     }
 
@@ -82,7 +97,7 @@ $(document).ready(function(){
         if (rounding === 0 && splitBetween === 0) {
             // Not rounding or splitting the bill.
         tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
-        billWithTip = parseFloat(tipTotal, 10) + billTotal;
+        billWithTip = (parseFloat(tipTotal, 10) + billTotal).toFixed(2);
         displayTotals();
         } else if (rounding === 0 && splitBetween != 0) {
             // Splitting the bill, but not rounding it.
@@ -133,6 +148,7 @@ $(document).ready(function(){
         $("#tip-person-total").text("$ " + tipPerPerson + " per person");
         $("#bill-with-tip-per-person").text("$ " + billWithTipPerPerson + " per person");
 
+    // Return global variables to their default.
         billTotal = 0;
         tipPercentage = 0;
         splitBetween = 0;
