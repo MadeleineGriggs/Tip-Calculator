@@ -13,10 +13,24 @@ var billWithTipPerPerson = 0;
 
 
 $(document).ready(function(){
+
+//This function allows the page to smoothly scroll to whichever id or class you call it from.
+//It is used so if the users has a smaller screen, when they click on "Calculate Tip", their
+//screen will scroll down to the results section.
+    $.fn.scrollView = function () {
+        return this.each(function () {
+            $('html, body').animate({
+                scrollTop: $(this).offset().top
+            }, 1000);
+        });
+    }
+
+
     $("#submit-btn").on("click", function() {
         // prevent button from trying to submit the form to a server.
         event.preventDefault();
         checkFields();
+        $(".results").scrollView();
     })
 
 
@@ -73,7 +87,7 @@ $(document).ready(function(){
         } else if (rounding === 0 && splitBetween != 0) {
             // Splitting the bill, but not rounding it.
             tipTotalPreSplit = ((tipPercentage / 100) * billTotal).toFixed(2);
-            billWithTip = parseFloat(tipTotalPreSplit, 10) + billTotal;
+            billWithTip = (parseFloat(tipTotalPreSplit, 10) + billTotal).toFixed(2);
             tipPerPerson = (parseFloat(tipTotalPreSplit, 10) / splitBetween).toFixed(2);
             billWithTipPerPerson = (parseFloat(billWithTip, 10) / splitBetween).toFixed(2);
             tipTotal = parseFloat(tipTotalPreSplit, 10).toFixed(2);
@@ -90,8 +104,8 @@ $(document).ready(function(){
             } else {
             tipTotalPreRound = ((tipPercentage / 100) * billTotal).toFixed(2);
             billWithTipPreRound = parseFloat(tipTotalPreRound, 10) + billTotal;
-            billWithTip = (Math.ceil(parseInt(billWithTipPreRound) * rounding) / rounding).toFixed(2);
-            tipTotal = parseInt(billWithTip) - billTotal;
+            billWithTip = (Math.ceil(parseFloat(billWithTipPreRound, 10) * rounding) / rounding).toFixed(2);
+            tipTotal = (parseFloat(billWithTip, 10) - billTotal).toFixed(2);
             }
             displayTotals();
         } else if (rounding !=0 && splitBetween != 0) {
