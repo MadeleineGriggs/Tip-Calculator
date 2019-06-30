@@ -1,3 +1,5 @@
+/* Styles which apply to several areas of the page */
+
 :root {
     --main-purple: #7d4fcc;
     --light-purple: #f5f0ff;
@@ -9,18 +11,8 @@
     --body-font: 'Josefin Slab', serif;
 }
 
-
 .hidden {
     display: none;
-}
-
-.title {
-    font-family: var(--title-font);
-    color: var(--main-purple);
-    font-size: 5rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    text-align: center;
 }
 
 .sub-title {
@@ -46,10 +38,7 @@
     margin-bottom: 5rem;
 }
 
-.radio-btn-container {
-    display: flex;
-    flex-direction: column;
-}
+/* Styles related to the title area */
 
 .calc-intro {
     font-family: var(--body-font);
@@ -60,6 +49,17 @@
     text-align: center;
     line-height: 1.5rem;
 }
+
+.title {
+    font-family: var(--title-font);
+    color: var(--main-purple);
+    font-size: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Styles related to the 'calculate tips' area of the page */
 
 .tip-form {
     background-color: var(--light-purple);
@@ -97,6 +97,57 @@
     margin-left: 1rem;
 }
 
+    /* Custom Radio Buttons Styling */
+    .radio-btn-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-left: 2rem;
+    }
+    
+    .radio {
+        position: relative;
+    }
+    
+    input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+    
+    .checkmark {
+        position: absolute;
+        margin-left: -2rem;
+        margin-top: 0.15rem; 
+        height: 20px;
+        width: 20px;
+        background-color: rgb(93, 90, 114, 0.75);
+        border-radius: 50%;
+    }
+    
+    .checkmark:hover {
+        background-color: rgba(125, 79, 204, 0.75);
+      }
+    
+    .radio:checked ~ .checkmark {
+        background-color: var(--main-purple);
+      }
+    
+      .radio:checked ~ .checkmark:after {
+        content: " ";
+        position: absolute;
+        left: 6px;
+        top: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+          display: block;
+      }
+      
+/* Styling relating to the results section of the page. */
 .results {
     display: flex;
     flex-direction: column;
@@ -154,6 +205,7 @@ input[type=text]:focus {
     background-color: rgba(125, 79, 204, 0.25);
     opacity: 0;
     visibility: hidden;
+    z-index: 2;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
@@ -170,6 +222,7 @@ input[type=text]:focus {
     font-family: var(--body-font);
     color: var(--mid-gray);
     font-size: 1.5rem;
+    z-index: 5;
 }
 
 .close-button {
@@ -179,12 +232,14 @@ input[type=text]:focus {
     text-align: center;
     cursor: pointer;
     border-radius: 0.25rem;
-    background-color: lightgray;
+    background-color: rgba(125, 79, 204, 0.5);
     font-size: 1rem;
+    color: var(--dark-gray);
 }
 
 .close-button:hover {
-    background-color: darkgray;
+    background-color: rgba(125, 79, 204, 0.85);
+    color: white;
 }
 
 .show-modal {

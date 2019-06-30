@@ -71,7 +71,8 @@ $(document).ready(function(){
             // contains a number. If not, send an alert to the user. If so, set the tip percentage. If the user selects
             // a pre-set tip percentage, set tip percentage to that.
             if($('input:radio[name=tip-percentage]:checked').val() == "custom" && $("#custom-tip-field").val() === "") {
-                alert("You have selected 'Custom Tip', but you have not entered the custom tip amount in the custom tip field.");
+                $("#modal-message").text("You have selected 'Custom Tip', but you have not entered the custom tip amount in the custom tip field.")
+                toggleModal();
             } else if($('input:radio[name=tip-percentage]:checked', "#my-form").val() == "custom") {
                 tipPercentage = parseInt($("#custom-tip-field").val(), 10);
                 console.log("Custom Tip Percentage Active.")
@@ -98,6 +99,13 @@ $(document).ready(function(){
             // Not rounding or splitting the bill.
         tipTotal = ((tipPercentage / 100) * billTotal).toFixed(2);
         billWithTip = (parseFloat(tipTotal, 10) + billTotal).toFixed(2);
+        if($("#split-title").hasClass("hidden")) {
+
+        } else {
+            $("#split-display1").toggleClass("hidden");
+            $("#split-display2").toggleClass("hidden");
+            $("#split-title").toggleClass("hidden");
+        }
         displayTotals();
         } else if (rounding === 0 && splitBetween != 0) {
             // Splitting the bill, but not rounding it.
@@ -106,9 +114,13 @@ $(document).ready(function(){
             tipPerPerson = (parseFloat(tipTotalPreSplit, 10) / splitBetween).toFixed(2);
             billWithTipPerPerson = (parseFloat(billWithTip, 10) / splitBetween).toFixed(2);
             tipTotal = parseFloat(tipTotalPreSplit, 10).toFixed(2);
-            $("#split-display1").toggleClass("hidden");
-            $("#split-display2").toggleClass("hidden");
-            $("#split-title").toggleClass("hidden");
+            if($("#split-title").hasClass("hidden")) {
+                $("#split-display1").toggleClass("hidden");
+                $("#split-display2").toggleClass("hidden");
+                $("#split-title").toggleClass("hidden");
+            } else {
+
+            }
             displayTotals();
         } else if (rounding != 0 && splitBetween === 0) {
             // Rounding the bill, but not splitting it.
@@ -122,6 +134,13 @@ $(document).ready(function(){
             billWithTip = (Math.ceil(parseFloat(billWithTipPreRound, 10) * rounding) / rounding).toFixed(2);
             tipTotal = (parseFloat(billWithTip, 10) - billTotal).toFixed(2);
             }
+            if($("#split-title").hasClass("hidden")) {
+
+            } else {
+                $("#split-display1").toggleClass("hidden");
+                $("#split-display2").toggleClass("hidden");
+                $("#split-title").toggleClass("hidden");
+            }
             displayTotals();
         } else if (rounding !=0 && splitBetween != 0) {
             //Rounding and splitting the bill.
@@ -132,9 +151,13 @@ $(document).ready(function(){
             tipTotal = (parseFloat(billWithTip, 10) - billTotal).toFixed(2);
             tipPerPerson = (parseFloat(tipTotal, 10) / splitBetween).toFixed(2);
             billWithTipPerPerson = (parseInt(billWithTip) / splitBetween).toFixed(2);
-            $("#split-display1").toggleClass("hidden");
-            $("#split-display2").toggleClass("hidden");
-            $("#split-title").toggleClass("hidden");
+            if($("#split-title").hasClass("hidden")) {
+                $("#split-display1").toggleClass("hidden");
+                $("#split-display2").toggleClass("hidden");
+                $("#split-title").toggleClass("hidden");
+            } else {
+
+            }
             displayTotals();
         }
     }
