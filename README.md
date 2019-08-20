@@ -2,7 +2,7 @@
 ![Image of Tip Calculator Logo](assets/images/TipTitle.PNG)
 
 # Tip-Calculator
-An app for calculating tip amounts from a bill total, also allows for bill splitting. [Try it Here](https://typicu.github.io/Tip-Calculator/)
+An app for calculating tip amounts from a bill total, also allows for bill splitting. [Try it Here](https://madeleinegriggs.github.io/Tip-Calculator/)
 
 ## Author
 Madeleine Griggs.
